@@ -197,6 +197,13 @@ my @rules= (
     q#s/%EDITTABLE.*%//#,
     q#s/%CONTRIBUTORS.*%//#,
 
+    # Tiger-specific variables
+    q#s/%ENDCOLOR%/<\/span>/#,
+    q#s/%RED%/<span style="color: \#ff0000">/#,
+    q#s/%tick%/&\#10003;/#,
+    q#s/%TICK%/&\#10003;/#,
+    q#s/%X%/{{note}}/#,
+
     # Remove some tags with quirky patterns
     q#s/%A_\w+%//g#,
     q#s/%PARAM\d+%//g#,
