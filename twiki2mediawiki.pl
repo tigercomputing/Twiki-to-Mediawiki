@@ -193,6 +193,9 @@ my @rules= (
     q@s/%REDIRECT\{"?(\S+?)"?}%.*/"#REDIRECT ".makeInternalLink($1)/e@,
     q@s/%REDIRECT.*?%//@,
 
+    # %EDITTABLE%
+    q#s/%EDITTABLE.*%//#,
+
     # Remove some tags with quirky patterns
     q#s/%A_\w+%//g#,
     q#s/%PARAM\d+%//g#,
