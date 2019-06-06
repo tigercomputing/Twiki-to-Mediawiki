@@ -162,9 +162,9 @@ my @rules= (
     q#s/%TWIKIWEB%/TWiki/g#,
 
     # ICON
-    q#s/%ICON{\"?(.+?)\"?}%/<img src="%ICONURLPATH{$1}%"\/>/g#,   # will get expanded again by %ICONURLPATH% rule
-    q#s/%ICONURL{\"?(.+?)\"?}%/%ICONURLPATH{$1}%/g#,   # will get expanded again by %ICONURLPATH% rule
-    q#s/%ICONURLPATH{\"?(.+?)\"?}%/%PUBURL%\/TWiki\/TWikiDocGraphics\/$1.gif/g#,   # will get expanded again by %PUBURL% rule
+    q#s/%ICON\{\"?(.+?)\"?}%/<img src="%ICONURLPATH{$1}%"\/>/g#,   # will get expanded again by %ICONURLPATH% rule
+    q#s/%ICONURL\{\"?(.+?)\"?}%/%ICONURLPATH{$1}%/g#,   # will get expanded again by %ICONURLPATH% rule
+    q#s/%ICONURLPATH\{\"?(.+?)\"?}%/%PUBURL%\/TWiki\/TWikiDocGraphics\/$1.gif/g#,   # will get expanded again by %PUBURL% rule
 
     # ATTACHURL, PUBURL
     q#s/%ATTACHURL%\//attachmentLinkPrefix($web,$topic)/ge#,
@@ -177,20 +177,20 @@ my @rules= (
     q#s/%DISPLAYTIME%/{{CURRENTYEAR}}-{{CURRENTMONTH}}-{{CURRENTDAY}} {{CURRENTTIME}/g#,
 
     # %META%
-    q#s/^%META:TOPICINFO{author="(.*?)" date="(.*?)".*/setTopicInfo($1,$2)/ge#,  # %META:TOPICINFO
-    q#s/^%META:FILEATTACHMENT{(.*)}%/addAttachment($1,$web,$topic)/ge#,  # %META:FILEATTACHMENT
+    q#s/^%META:TOPICINFO\{author="(.*?)" date="(.*?)".*/setTopicInfo($1,$2)/ge#,  # %META:TOPICINFO
+    q#s/^%META:FILEATTACHMENT\{(.*)}%/addAttachment($1,$web,$topic)/ge#,  # %META:FILEATTACHMENT
     q#s/^%META.*//g#, # Remove remaining meta tags
 
     # %INCLUDE%
-    q#s/%INCLUDE{\s*(?:$web\.|)([$man]*?)\s*}%/{{:<nop>$1}}/g#,
-    q#s/%INCLUDE{\s*"(?:$web\.|)([$man]*?)".*?}%/{{:<nop>$1}}/g#,
-    q#s/%INCLUDE{.*?}%//g#, # remove remaining %INCLUDE{...}%'s
+    q#s/%INCLUDE\{\s*(?:$web\.|)([$man]*?)\s*}%/{{:<nop>$1}}/g#,
+    q#s/%INCLUDE\{\s*"(?:$web\.|)([$man]*?)".*?}%/{{:<nop>$1}}/g#,
+    q#s/%INCLUDE\{.*?}%//g#, # remove remaining %INCLUDE{...}%'s
     q#s/%STARTINCLUDE%/<onlyinclude>/#,
     q#s/%STOPINCLUDE%/<\/onlyinclude>/#,
 
     # %REDIRECT%
-    q@s/%REDIRECT{"$web.(\S+?)"}%.*/"#REDIRECT ".makeInternalLink($1)/e@,
-    q@s/%REDIRECT{"?(\S+?)"?}%.*/"#REDIRECT ".makeInternalLink($1)/e@,
+    q@s/%REDIRECT\{"$web.(\S+?)"}%.*/"#REDIRECT ".makeInternalLink($1)/e@,
+    q@s/%REDIRECT\{"?(\S+?)"?}%.*/"#REDIRECT ".makeInternalLink($1)/e@,
     q@s/%REDIRECT.*?%//@,
 
     # Remove some tags with quirky patterns
@@ -198,7 +198,7 @@ my @rules= (
     q#s/%PARAM\d+%//g#,
     q#s/%POS:(.*?)%//g#,
     q#s/%SECTION\d+%//g#,
-    q#s/%TMPL:DEF{.*?}.*?%TMPL:END%//g#,
+    q#s/%TMPL:DEF\{.*?}.*?%TMPL:END%//g#,
     q#s/%TMPL:[A-Z]+(|{.*?})%//g#,
 
     # EfetchPlugin -> Extension:PubmedParser
@@ -731,7 +731,7 @@ sub parseTwikiVars {
     while (<TWIKI>) {
 	if (/\* +Set +$varPattern += +(.*)/) {
 	    setTwikiVar($1,$2);
-	} elsif (/^%META:PREFERENCE{name="(.+?)".*type="Set".*value="(.*?)"/) {
+	} elsif (/^%META:PREFERENCE\{name="(.+?)".*type="Set".*value="(.*?)"/) {
 	    setTwikiVar($1,$2);
 	}
     }
