@@ -387,13 +387,13 @@ for my $twikiFile (@twikiFiles) {
 	# 
 	if (/^\s*\|.*\|\s*$/) { 	# Is this the first row of the table? If so, add header 
 	    if (!$convertingTable) { 
-		push @output, "{| border=\"1\"\n"; 
+		push @output, "{| class=\"wikitable\"\n"; 
 		$convertingTable = 1; 
 	    } 		# start new row 
 	    push @output, "|-\n"; 
 	    my $arAnswer = $_; 
-	    $arAnswer =~ s/\|\s*$//; 		#remove end pipe. 
-	    $arAnswer =~ s/(.)\|(.)/$1\|\|$2/g; 		#Change single pipe to double pipe. 
+	    $arAnswer =~ s/\s*\|\s*$//; 		#remove end pipe.
+	    $arAnswer =~ s/(.)\s*\|(.?)/$1\n\|$2/g; 		# Convert rows to multi-line.
 	    my $text = _translateText($arAnswer); 
 	    push @output, "$text\n"; 
 	    # 
